@@ -18,8 +18,9 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         dataset = ArrayList<RickMorty>()
         adapter = RickRecycler(this, dataset)
-        recyclerView.layoutManager = LinearLayoutManager(applicationContext)
-        //recyclerView.adapter =RickRecycler(this, dataset)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter =RickRecycler(this, dataset)
+        recyclerView.setHasFixedSize(true)
         RetrofitInstance.api.getDetails().enqueue(object : retrofit2.Callback<RickMorty>{
             override fun onResponse(call: Call<RickMorty>, response: Response<RickMorty>) {
                 if (response.body()!=null){
